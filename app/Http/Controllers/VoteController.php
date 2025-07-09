@@ -20,15 +20,17 @@ class VoteController extends Controller
     {
         $kandidatPutra = Kandidat::putra()->get();
         $kandidatPutri = Kandidat::putri()->get();
-
-        return view('vote.index', compact('kandidatPutra', 'kandidatPutri'));
+        $jumlahKandidatPutra = Kandidat::putra()->count();
+        $jumlahKandidatPutri = Kandidat::putri()->count();
+        $totalKandidat = Kandidat::count();
+        return view('vote.index', compact('kandidatPutra', 'kandidatPutri', 'totalKandidat', 'jumlahKandidatPutra', 'jumlahKandidatPutri'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'votes' => 'required|array|size:6',
-            'votes.*' => 'required|json'
+            'votes' => 'required|array|min:1',
+            'votes.*' => 'required|string'
         ]);
 
         try {
@@ -36,7 +38,7 @@ class VoteController extends Controller
 
             // Create unique identifier combining session ID and IP
             $voterIdentifier = session()->getId() . '_' . request()->ip();
-            
+
             // Check if this voter has already voted
             $existingVote = \App\Models\Vote::where('voter_identifier', $voterIdentifier)->first();
             if ($existingVote) {
@@ -46,14 +48,17 @@ class VoteController extends Controller
                 ], 422);
             }
 
-            // Validate that we have exactly 6 votes (3 putra, 3 putri)
             $positions = ['pradana', 'wakil', 'adat'];
             $putraVotes = [];
             $putriVotes = [];
+            $usedPositions = [
+                'putra' => [],
+                'putri' => []
+            ];
 
             foreach ($request->votes as $voteJson) {
                 $vote = json_decode($voteJson, true);
-                
+
                 if (!$vote || !isset($vote['kandidat_id']) || !isset($vote['jabatan'])) {
                     throw new \Exception('Format vote tidak valid');
                 }
@@ -63,6 +68,20 @@ class VoteController extends Controller
                     throw new \Exception('Kandidat tidak ditemukan');
                 }
 
+                // Validate position exists
+                if (!in_array($vote['jabatan'], $positions)) {
+                    throw new \Exception('Jabatan tidak valid: ' . $vote['jabatan']);
+                }
+
+                $kategori = $kandidat->jenis_kelamin === 'Laki-laki' ? 'putra' : 'putri';
+
+                // Check for duplicate positions within same category
+                if (in_array($vote['jabatan'], $usedPositions[$kategori])) {
+                    throw new \Exception('Posisi ' . $vote['jabatan'] . ' untuk kategori ' . $kategori . ' sudah dipilih');
+                }
+
+                $usedPositions[$kategori][] = $vote['jabatan'];
+
                 if ($kandidat->jenis_kelamin === 'Laki-laki') {
                     $putraVotes[$vote['jabatan']] = $vote['kandidat_id'];
                 } else {
@@ -70,14 +89,7 @@ class VoteController extends Controller
                 }
             }
 
-            // Validate we have all required positions for both categories
-            foreach ($positions as $position) {
-                if (!isset($putraVotes[$position]) || !isset($putriVotes[$position])) {
-                    throw new \Exception('Pilihan tidak lengkap. Harus memilih 3 posisi untuk putra dan 3 posisi untuk putri');
-                }
-            }
-
-            // Save all votes
+            // Save all votes (flexible - tidak harus lengkap semua posisi)
             foreach ($request->votes as $voteJson) {
                 $vote = json_decode($voteJson, true);
 
@@ -92,11 +104,26 @@ class VoteController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Pilihan berhasil disimpan'
+                'message' => 'Pilihan berhasil disimpan',
+                'total_votes' => count($request->votes)
             ]);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            DB::rollback();
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Data yang dikirim tidak valid',
+                'errors' => $e->errors()
+            ], 422);
 
         } catch (\Exception $e) {
             DB::rollback();
+
+            \Log::error('Vote store error: ' . $e->getMessage(), [
+                'request_data' => $request->all(),
+                'ip' => request()->ip()
+            ]);
 
             return response()->json([
                 'success' => false,

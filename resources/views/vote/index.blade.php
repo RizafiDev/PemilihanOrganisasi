@@ -161,189 +161,73 @@
                     <div class="p-8">
                         <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
                             <!-- Sample Putra Candidates -->
-                            <div class="candidate-card bg-white rounded-xl p-6 relative" data-kategori="putra"
-                                data-kandidat-id="1" data-nama="Ahmad Fauzi">
-
-                                <div class="text-center mb-6">
-                                    <div
-                                        class="photo-frame w-20 h-20 mx-auto bg-gradient-to-br from-blue-400 to-blue-600 rounded-full overflow-hidden mb-4">
-                                        <div class="w-full h-full flex items-center justify-center">
-                                            <span class="text-white text-2xl font-bold">A</span>
+                            @foreach ($kandidatPutra as $putra)
+                                <div class="candidate-card bg-white rounded-xl p-6 relative" data-kategori="putra"
+                                    data-kandidat-id="{{ $putra->id }}" data-nama="{{ $putra->nama }}">
+                                    <div class="text-center mb-6">
+                                        <div
+                                            class="photo-frame w-20 h-20 mx-auto bg-gradient-to-br from-blue-400 to-blue-600 rounded-full overflow-hidden mb-4">
+                                            @if($putra->foto)
+                                                <img src="{{ asset('storage/' . $putra->foto) }}" alt="{{ $putra->nama }}"
+                                                    class="w-full h-full object-cover">
+                                            @else
+                                                <div class="w-full h-full flex items-center justify-center">
+                                                    <span
+                                                        class="text-white text-2xl font-bold">{{ substr($putra->nama, 0, 1) }}</span>
+                                                </div>
+                                            @endif
                                         </div>
-                                    </div>
-                                    <h3 class="font-bold text-xl text-gray-900 mb-1">Ahmad Fauzi</h3>
-                                    <p class="text-gray-500 text-sm">Kandidat Putra</p>
-                                </div>
-
-                                <div class="space-y-3">
-                                    <label class="block text-sm font-semibold text-gray-700 mb-3">Pilih Jabatan:</label>
-
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="pradana"
-                                        data-kategori="putra" data-kandidat-id="1">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Pradana Putra</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Terpilih</span>
-                                            </div>
-                                        </div>
+                                        <h3 class="font-bold text-xl text-gray-900 mb-1">{{ $putra->nama }}</h3>
+                                        <p class="text-gray-500 text-sm">Kandidat Putra</p>
                                     </div>
 
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="wakil"
-                                        data-kategori="putra" data-kandidat-id="1">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Wakil Pradana Putra</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Terpilih</span>
+                                    <div class="space-y-3">
+                                        <label class="block text-sm font-semibold text-gray-700 mb-3">Pilih Jabatan:</label>
+
+                                        <div class="position-option p-3 rounded-lg cursor-pointer" data-position="pradana"
+                                            data-kategori="putra" data-kandidat-id="{{ $putra->id }}">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center space-x-3">
+                                                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                                    <span class="font-medium text-sm">Pradana Putra</span>
+                                                </div>
+                                                <div class="position-status hidden">
+                                                    <span
+                                                        class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Terpilih</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="adat"
-                                        data-kategori="putra" data-kandidat-id="1">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Pemangku Adat Putra</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Terpilih</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Additional Putra Candidates -->
-                            <div class="candidate-card bg-white rounded-xl p-6 relative" data-kategori="putra"
-                                data-kandidat-id="2" data-nama="Budi Santoso">
-
-                                <div class="text-center mb-6">
-                                    <div
-                                        class="photo-frame w-20 h-20 mx-auto bg-gradient-to-br from-blue-400 to-blue-600 rounded-full overflow-hidden mb-4">
-                                        <div class="w-full h-full flex items-center justify-center">
-                                            <span class="text-white text-2xl font-bold">B</span>
-                                        </div>
-                                    </div>
-                                    <h3 class="font-bold text-xl text-gray-900 mb-1">Budi Santoso</h3>
-                                    <p class="text-gray-500 text-sm">Kandidat Putra</p>
-                                </div>
-
-                                <div class="space-y-3">
-                                    <label class="block text-sm font-semibold text-gray-700 mb-3">Pilih Jabatan:</label>
-
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="pradana"
-                                        data-kategori="putra" data-kandidat-id="2">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Pradana Putra</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Terpilih</span>
+                                        <div class="position-option p-3 rounded-lg cursor-pointer" data-position="wakil"
+                                            data-kategori="putra" data-kandidat-id="{{ $putra->id }}">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center space-x-3">
+                                                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                                    <span class="font-medium text-sm">Wakil Pradana Putra</span>
+                                                </div>
+                                                <div class="position-status hidden">
+                                                    <span
+                                                        class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Terpilih</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="wakil"
-                                        data-kategori="putra" data-kandidat-id="2">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Wakil Pradana Putra</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Terpilih</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="adat"
-                                        data-kategori="putra" data-kandidat-id="2">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Pemangku Adat Putra</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Terpilih</span>
+                                        <div class="position-option p-3 rounded-lg cursor-pointer" data-position="adat"
+                                            data-kategori="putra" data-kandidat-id="{{ $putra->id }}">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center space-x-3">
+                                                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                                    <span class="font-medium text-sm">Pemangku Adat Putra</span>
+                                                </div>
+                                                <div class="position-status hidden">
+                                                    <span
+                                                        class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Terpilih</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="candidate-card bg-white rounded-xl p-6 relative" data-kategori="putra"
-                                data-kandidat-id="3" data-nama="Chandra Wijaya">
-
-                                <div class="text-center mb-6">
-                                    <div
-                                        class="photo-frame w-20 h-20 mx-auto bg-gradient-to-br from-blue-400 to-blue-600 rounded-full overflow-hidden mb-4">
-                                        <div class="w-full h-full flex items-center justify-center">
-                                            <span class="text-white text-2xl font-bold">C</span>
-                                        </div>
-                                    </div>
-                                    <h3 class="font-bold text-xl text-gray-900 mb-1">Chandra Wijaya</h3>
-                                    <p class="text-gray-500 text-sm">Kandidat Putra</p>
-                                </div>
-
-                                <div class="space-y-3">
-                                    <label class="block text-sm font-semibold text-gray-700 mb-3">Pilih Jabatan:</label>
-
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="pradana"
-                                        data-kategori="putra" data-kandidat-id="3">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Pradana Putra</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Terpilih</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="wakil"
-                                        data-kategori="putra" data-kandidat-id="3">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Wakil Pradana Putra</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Terpilih</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="adat"
-                                        data-kategori="putra" data-kandidat-id="3">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Pemangku Adat Putra</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Terpilih</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -359,189 +243,76 @@
 
                     <div class="p-8">
                         <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
-                            <!-- Sample Putri Candidates -->
-                            <div class="candidate-card bg-white rounded-xl p-6 relative" data-kategori="putri"
-                                data-kandidat-id="4" data-nama="Aisyah Putri">
 
-                                <div class="text-center mb-6">
-                                    <div
-                                        class="photo-frame w-20 h-20 mx-auto bg-gradient-to-br from-pink-400 to-pink-600 rounded-full overflow-hidden mb-4">
-                                        <div class="w-full h-full flex items-center justify-center">
-                                            <span class="text-white text-2xl font-bold">A</span>
+                            @foreach ($kandidatPutri as $putri)
+                                <!-- Sample Putri Candidates -->
+                                <div class="candidate-card bg-white rounded-xl p-6 relative" data-kategori="putri"
+                                    data-kandidat-id="{{ $putri->id }}" data-nama="{{$putri->nama}}">
+
+                                    <div class="text-center mb-6">
+                                        <div
+                                            class="photo-frame w-20 h-20 mx-auto bg-gradient-to-br from-blue-400 to-blue-600 rounded-full overflow-hidden mb-4">
+                                            @if($putri->foto)
+                                                <img src="{{ asset('storage/' . $putri->foto) }}" alt="{{ $putri->nama }}"
+                                                    class="w-full h-full object-cover">
+                                            @else
+                                                <div class="w-full h-full flex items-center justify-center">
+                                                    <span
+                                                        class="text-white text-2xl font-bold">{{ substr($putri->nama, 0, 1) }}</span>
+                                                </div>
+                                            @endif
                                         </div>
-                                    </div>
-                                    <h3 class="font-bold text-xl text-gray-900 mb-1">Aisyah Putri</h3>
-                                    <p class="text-gray-500 text-sm">Kandidat Putri</p>
-                                </div>
-
-                                <div class="space-y-3">
-                                    <label class="block text-sm font-semibold text-gray-700 mb-3">Pilih Jabatan:</label>
-
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="pradana"
-                                        data-kategori="putri" data-kandidat-id="4">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Pradana Putri</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Terpilih</span>
-                                            </div>
-                                        </div>
+                                        <h3 class="font-bold text-xl text-gray-900 mb-1">{{$putri->nama}}</h3>
+                                        <p class="text-gray-500 text-sm">Kandidat Putri</p>
                                     </div>
 
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="wakil"
-                                        data-kategori="putri" data-kandidat-id="4">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Wakil Pradana Putri</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Terpilih</span>
+                                    <div class="space-y-3">
+                                        <label class="block text-sm font-semibold text-gray-700 mb-3">Pilih Jabatan:</label>
+
+                                        <div class="position-option p-3 rounded-lg cursor-pointer" data-position="pradana"
+                                            data-kategori="putri" data-kandidat-id="{{ $putri->id }}">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center space-x-3">
+                                                    <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
+                                                    <span class="font-medium text-sm">Pradana Putri</span>
+                                                </div>
+                                                <div class="position-status hidden">
+                                                    <span
+                                                        class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Terpilih</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="adat"
-                                        data-kategori="putri" data-kandidat-id="4">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Pemangku Adat Putri</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Terpilih</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="candidate-card bg-white rounded-xl p-6 relative" data-kategori="putri"
-                                data-kandidat-id="5" data-nama="Bella Sari">
-
-                                <div class="text-center mb-6">
-                                    <div
-                                        class="photo-frame w-20 h-20 mx-auto bg-gradient-to-br from-pink-400 to-pink-600 rounded-full overflow-hidden mb-4">
-                                        <div class="w-full h-full flex items-center justify-center">
-                                            <span class="text-white text-2xl font-bold">B</span>
-                                        </div>
-                                    </div>
-                                    <h3 class="font-bold text-xl text-gray-900 mb-1">Bella Sari</h3>
-                                    <p class="text-gray-500 text-sm">Kandidat Putri</p>
-                                </div>
-
-                                <div class="space-y-3">
-                                    <label class="block text-sm font-semibold text-gray-700 mb-3">Pilih Jabatan:</label>
-
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="pradana"
-                                        data-kategori="putri" data-kandidat-id="5">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Pradana Putri</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Terpilih</span>
+                                        <div class="position-option p-3 rounded-lg cursor-pointer" data-position="wakil"
+                                            data-kategori="putri" data-kandidat-id="{{ $putri->id }}">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center space-x-3">
+                                                    <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
+                                                    <span class="font-medium text-sm">Wakil Pradana Putri</span>
+                                                </div>
+                                                <div class="position-status hidden">
+                                                    <span
+                                                        class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Terpilih</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="wakil"
-                                        data-kategori="putri" data-kandidat-id="5">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Wakil Pradana Putri</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Terpilih</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="adat"
-                                        data-kategori="putri" data-kandidat-id="5">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Pemangku Adat Putri</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Terpilih</span>
+                                        <div class="position-option p-3 rounded-lg cursor-pointer" data-position="adat"
+                                            data-kategori="putri" data-kandidat-id="{{ $putri->id }}">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center space-x-3">
+                                                    <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
+                                                    <span class="font-medium text-sm">Pemangku Adat Putri</span>
+                                                </div>
+                                                <div class="position-status hidden">
+                                                    <span
+                                                        class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Terpilih</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="candidate-card bg-white rounded-xl p-6 relative" data-kategori="putri"
-                                data-kandidat-id="6" data-nama="Citra Dewi">
-
-                                <div class="text-center mb-6">
-                                    <div
-                                        class="photo-frame w-20 h-20 mx-auto bg-gradient-to-br from-pink-400 to-pink-600 rounded-full overflow-hidden mb-4">
-                                        <div class="w-full h-full flex items-center justify-center">
-                                            <span class="text-white text-2xl font-bold">C</span>
-                                        </div>
-                                    </div>
-                                    <h3 class="font-bold text-xl text-gray-900 mb-1">Citra Dewi</h3>
-                                    <p class="text-gray-500 text-sm">Kandidat Putri</p>
-                                </div>
-
-                                <div class="space-y-3">
-                                    <label class="block text-sm font-semibold text-gray-700 mb-3">Pilih Jabatan:</label>
-
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="pradana"
-                                        data-kategori="putri" data-kandidat-id="6">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Pradana Putri</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Terpilih</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="wakil"
-                                        data-kategori="putri" data-kandidat-id="6">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Wakil Pradana Putri</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Terpilih</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-option p-3 rounded-lg cursor-pointer" data-position="adat"
-                                        data-kategori="putri" data-kandidat-id="6">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
-                                                <span class="font-medium text-sm">Pemangku Adat Putri</span>
-                                            </div>
-                                            <div class="position-status hidden">
-                                                <span
-                                                    class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Terpilih</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -553,7 +324,7 @@
                         <div class="flex items-center space-x-3">
                             <span class="text-gray-900 font-semibold text-lg">Progress Pemilihan</span>
                             <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">
-                                <span id="selected-count">0</span>/6
+                                <span id="selected-count">0</span>/{{ $totalKandidat }}
                             </span>
                         </div>
                         <div class="text-gray-600 text-sm font-medium">
@@ -584,7 +355,8 @@
                     </button>
                     <p class="text-gray-600 text-sm mt-4">
                         <span class="inline-block w-2 h-2 bg-orange-400 rounded-full mr-2"></span>
-                        Pastikan Anda telah memilih 6 kandidat (3 putra, 3 putri)
+                        Pastikan Anda telah memilih {{$totalKandidat}} kandidat ({{$jumlahKandidatPutra}} putra,
+                        {{$jumlahKandidatPutri}} putri)
                     </p>
                 </div>
             </div>
@@ -702,7 +474,7 @@
                 }
 
                 // Update progress bar to show completed state
-                document.getElementById('selected-count').textContent = '6';
+                document.getElementById('selected-count').textContent = '{{ $totalKandidat }}';
                 document.getElementById('progress-bar').style.width = '100%';
                 document.getElementById('progress-percentage').textContent = '100%';
 
@@ -854,8 +626,9 @@
             function updateProgress() {
                 const totalSelected = Object.values(selectedPositions.putra).filter(v => v !== null).length +
                     Object.values(selectedPositions.putri).filter(v => v !== null).length;
-
-                const percentage = Math.round((totalSelected / 6) * 100);
+                const totalKandidat = {{ $totalKandidat }};
+                const totalVote = {{ $totalKandidat }}; // Harus 6 kandidat (3 putra + 3 putri)
+                const percentage = Math.round((totalSelected / totalVote) * 100);
 
                 document.getElementById('selected-count').textContent = totalSelected;
                 document.getElementById('progress-bar').style.width = percentage + '%';
@@ -864,16 +637,16 @@
                 const progressText = document.getElementById('progress-text');
                 if (totalSelected === 0) {
                     progressText.textContent = 'Mulai memilih kandidat favorit Anda';
-                } else if (totalSelected < 6) {
-                    progressText.textContent = `Pilih ${6 - totalSelected} kandidat lagi untuk melengkapi`;
+                } else if (totalSelected < totalVote) {
+                    progressText.textContent = `Pilih ${totalVote - totalSelected} kandidat lagi untuk melengkapi`;
                 } else {
                     progressText.textContent = '🎉 Pilihan lengkap! Siap untuk submit';
                 }
 
                 const submitBtn = document.getElementById('submit-btn');
-                submitBtn.disabled = totalSelected < 6;
+                submitBtn.disabled = totalSelected < totalVote;
 
-                if (totalSelected === 6) {
+                if (totalSelected === totalVote) {
                     submitBtn.classList.add('animate-pulse');
                     submitBtn.classList.add('glow');
                 } else {
@@ -1020,11 +793,13 @@
 
                 const totalSelected = Object.values(selectedPositions.putra).filter(v => v !== null).length +
                     Object.values(selectedPositions.putri).filter(v => v !== null).length;
+                const totalKandidat = {{ $totalKandidat }};
+                const totalVote = {{ $totalKandidat }}; // Harus 6 kandidat (3 putra + 3 putri)
 
-                if (totalSelected < 6) {
+                if (totalSelected < totalVote) {
                     Swal.fire({
                         title: 'Pilihan Belum Lengkap',
-                        text: `Anda masih perlu memilih ${6 - totalSelected} kandidat lagi.`,
+                        text: `Anda masih perlu memilih ${totalVote - totalSelected} kandidat lagi.`,
                         icon: 'warning',
                         confirmButtonText: 'OK, Saya Mengerti',
                         confirmButtonColor: '#3b82f6'
@@ -1139,7 +914,7 @@
                                         confirmButtonColor: '#10b981'
                                     });
 
-                                    setTimeout(() => location.reload(), 3000);
+                                    location.reload(); // Reload to show readonly state
                                 } else {
                                     throw new Error(data.message || 'Terjadi kesalahan saat menyimpan voting');
                                 }

@@ -48,6 +48,11 @@
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
+        .modal-backdrop {
+            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 
@@ -99,7 +104,7 @@
             </button>
 
             <!-- Monitor Button -->
-            <button
+            <button onclick="openPasswordModal()"
                 class="w-full bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white font-semibold py-4 px-8 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300 hover:shadow-xl group">
                 <div class="flex items-center justify-center space-x-3">
                     <div
@@ -126,6 +131,83 @@
         </div>
     </div>
 
+    <!-- Password Modal -->
+    <div id="passwordModal" class="fixed inset-0 modal-backdrop flex items-center justify-center p-4 hidden z-50">
+        <div class="glassmorphism rounded-2xl p-6 max-w-md w-full shadow-2xl transform transition-all duration-300">
+            <div class="text-center mb-6">
+                <div
+                    class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full mx-auto flex items-center justify-center mb-4">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Akses Monitor</h3>
+                <p class="text-white text-opacity-80 text-sm">Masukkan password untuk mengakses halaman monitor</p>
+            </div>
+
+            <form id="passwordForm" class="space-y-4">
+                <div>
+                    <input type="password" id="passwordInput" placeholder="Masukkan password..."
+                        class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-xl text-white placeholder-white placeholder-opacity-60 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-all duration-300">
+                </div>
+                <div id="errorMessage" class="text-red-300 text-sm hidden">Password salah! Silakan coba lagi.</div>
+                <div class="flex space-x-3">
+                    <button type="button" onclick="closePasswordModal()"
+                        class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300">
+                        Batal
+                    </button>
+                    <button type="submit"
+                        class="flex-1 bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300">
+                        Masuk
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openPasswordModal() {
+            document.getElementById('passwordModal').classList.remove('hidden');
+            document.getElementById('passwordInput').focus();
+        }
+
+        function closePasswordModal() {
+            document.getElementById('passwordModal').classList.add('hidden');
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('errorMessage').classList.add('hidden');
+        }
+
+        document.getElementById('passwordForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const password = document.getElementById('passwordInput').value;
+            const correctPassword = 'admin123'; // Ganti dengan password yang diinginkan
+
+            if (password === correctPassword) {
+                // Redirect ke halaman monitor (ganti dengan route yang sesuai)
+                window.location.href = '/monitor'; // atau route yang sesuai
+            } else {
+                document.getElementById('errorMessage').classList.remove('hidden');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('passwordModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closePasswordModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closePasswordModal();
+            }
+        });
+    </script>
 
 </body>
 
