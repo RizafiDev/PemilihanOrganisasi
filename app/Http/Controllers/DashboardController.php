@@ -6,17 +6,26 @@ use App\Models\Dashboard;
 use App\Models\Kandidat;
 use App\Models\Vote;
 use Illuminate\Http\Request;
+use App\Models\KandidatFirebase;
+use App\Models\VoteFirebase;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $kandidatModel;
+    protected $voteModel;
+
+    public function __construct()
+    {
+        $this->kandidatModel = new KandidatFirebase();
+        $this->voteModel = new VoteFirebase();
+    }
+
     public function index()
     {
-        $totalKandidat = Kandidat::count();
-        $totalSuara = Vote::count();
-        $kandidats = Kandidat::all();
+        $totalKandidat = $this->kandidatModel->count();
+        $totalSuara = $this->voteModel->count();
+        $kandidats = $this->kandidatModel->all();
+
         return view('dashboard.index', compact('totalKandidat', 'totalSuara', 'kandidats'));
     }
 

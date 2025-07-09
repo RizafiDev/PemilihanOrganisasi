@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\ServiceProvider;
 return [
 
     /*
@@ -14,6 +15,10 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+
+    'providers' => ServiceProvider::defaultProviders()->merge([
+        App\Providers\FirebaseServiceProvider::class,
+    ])->toArray(),
 
     /*
     |--------------------------------------------------------------------------
